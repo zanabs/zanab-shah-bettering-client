@@ -7,7 +7,7 @@ import { Box, Avatar } from '@mui/material';
 
 export const ListCard = ({ cardItem }) => {
   const navigate = useNavigate();
-  const handleClick = (categoryId, resourceId) => navigate(`/resource/${categoryId}/${resourceId}`);
+  const handleClick = (categoryId, resourceId) => navigate(`./${resourceId}`);
 
   const [resource, setResource] = useState({
     name: '',
