@@ -8,6 +8,7 @@ import { CategoryPage } from './pages/CategoryPage/CategoryPage';
 import { CitySelectorPage } from './pages/CitySelectorPage/CitySelectorPage';
 import { CityPage } from './pages/CityPage/CityPage';
 import { NotFound } from './pages/NotFound';
+import { LoginPage } from './pages/loginPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <div className='main-content'>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />}/>
             <Route path="/city" element={<CitySelectorPage />} />
             <Route path="/city/:cityName" element={<CityPage />} />
             <Route path="/city/:cityName/category/:categoryId" element={<CategoryPage />} />

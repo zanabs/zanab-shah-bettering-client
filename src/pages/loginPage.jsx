@@ -19,7 +19,7 @@ const signIn = async (provider) => {
   return promise;
 };
 
-export default function OAuthSignInPage() {
+export const LoginPage = () => {
   const theme = useTheme();
   return (
     <AppProvider theme={theme}>
