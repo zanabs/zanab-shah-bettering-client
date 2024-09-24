@@ -1,9 +1,9 @@
-import { Box, Typography, Grid, Card, Avatar } from "@mui/material";
+import { Box, Typography, Grid2 as Grid, Card, Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const CategoryCardsList = () => {
+export const CategoryCardsList = ({ resources }) => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
   const [categories, setCategories] = useState([]);
@@ -22,7 +22,7 @@ export const CategoryCardsList = () => {
   }, []);
 
   const handleClick = (categoryId) => {
-    navigate(`/category/${categoryId}`);
+    navigate(`./category/${categoryId}`);
   };
 
   return (
@@ -31,39 +31,32 @@ export const CategoryCardsList = () => {
         display: "flex",
         flexDirection: "column",
         gap: 3,
-        p: 3,
         bgcolor: "background.default",
-        minHeight: "100vh",
+        minHeight: "90vh",
         overflow: "hidden",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-        <Typography variant="h4" component="h1">
-          Social Prescription Platform
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
-          Categories
-        </Typography>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          {categories.map((category) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <CategoryCard resources={resources} category={category} onClick={() => handleClick(category.id)} />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
-
-      <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
-        {categories.map((category) => (
-          <Grid item xs={12} sm={6} md={4} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <CategoryCard category={category} onClick={() => handleClick(category.id)} />
-          </Grid>
-        ))}
-      </Grid>
     </Box>
   );
 };
 
-const CategoryCard = ({ category, onClick }) => {
+const CategoryCard = ({ category, onClick, resources }) => {
   const [displayedLocations, setDisplayedLocations] = useState(1);
 
   useEffect(() => {
     let current = 1;
     const incrementSpeed = 50;
-    const target = category.number_of_locations;
+
+    const target = resources.filter(resource => (resource.properties.type === category.id)).length;
 
     const interval = setInterval(() => {
       setDisplayedLocations((prev) => {
@@ -78,7 +71,7 @@ const CategoryCard = ({ category, onClick }) => {
     }, incrementSpeed);
 
     return () => clearInterval(interval);
-  }, [category.number_of_locations]);
+  }, [resources]);
 
   return (
     <Card
