@@ -69,13 +69,12 @@ Care providers:
 ![View all resources page](/WebPage-Screenshots/View-All-Resources.png)
 
 - Clicking any category takes you to the Category Page, where resources are listed by category. User can search using tags, or manually enter the name of the location they're looking for. The MapCard component, which renders in different forms (the most general form occuring when a city is selected and all resources are loaded), shows only those resources that are within the selected category.
+
+- Across all map views/renderings of the MapCard component, clicking on a map-marker renders a feature of the "Advance Marker" component which provides a button leading to real time Google directions. 
 ![View all resources in category](/WebPage-Screenshots/View-All-Resources-in-Category.png)
 
 - Clicking on a particular resource takes you to the Resource Detail page, which loads the most specific version of the MapCard with just a single location and a description of the services provided + the associated tags. 
 ![View resource details page](/WebPage-Screenshots/View-Resource-Details.png)
-
-- Across all map views/renderings of the MapCard component, clicking on a map-marker renders a feature of the "Advance Marker" component which provides a button leading to real time Google directions. 
-![Click resource marker](/WebPage-Screenshots/Click-Resource-Marker.png)
 
 ### Endpoints
 
