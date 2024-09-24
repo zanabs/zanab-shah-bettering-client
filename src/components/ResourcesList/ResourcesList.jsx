@@ -241,12 +241,12 @@ export const ResourcesList = ({ resources, categoryId, cityName }) => {
                 </Box>
             )}
 
-            <Box display="flex" gap="20px" style={{ marginTop: '20px' }}>
-                <Box width="50%">
+            <Box display="flex" flexWrap={'wrap'} gap="20px" style={{ marginTop: '20px' }}>
+                <Box sx={{width: {sm: "100%", md: 'calc(50% - 20px)'}}} boxSizing={'border-box'}>
                     <h2>{selectedTags.length === 0 && !searchTerm ? 'All Resources' : 'Selected Locations'}</h2>
                     <CardsList cardsItems={filteredResources} />
                 </Box>
-                <Box width="50%" borderLeft="2px solid black" paddingLeft="10px">
+                <Box sx={{width: {sm: "100%", md: '50%'}}} boxSizing={'border-box'} borderLeft="2px solid black" paddingLeft="10px">
                     <h2>Open Now</h2>
                     <CardsList cardsItems={openNowResources} />
                 </Box>

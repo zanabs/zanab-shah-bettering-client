@@ -97,6 +97,7 @@ export const ListCard = ({ cardItem }) => {
         borderColor: 'divider',
         cursor: 'pointer',
         minHeight: '200px',
+        width: '100%'
       }}
       onClick={() => handleClick(resource.type, resource.id)}
     >

@@ -18,7 +18,6 @@ export const HomePage = () => {
       </video>
 
       <div className="hero-content">
-
         <h1 key={key} className="hero-heading">
           Find access to social infrastructure, <span className="fast-typing">fast</span>
         </h1>

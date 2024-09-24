@@ -3,6 +3,7 @@ import { AppBar, Box, Toolbar, IconButton, Button, TextField, Menu, MenuItem, Co
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import './Header.scss';
+import { Link } from 'react-router-dom';
 
 const pages = ['Contact'];
 
@@ -26,12 +27,14 @@ const Header = () => {
     <AppBar position="static" color="transparent" sx={{ backgroundColor: '#CFF7D3', borderBottom: 1, borderColor: 'divider' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-          <Box
-            component="img"
-            alt="Block"
-            src="/src/assets/b.png"
-            sx={{ flex: '0 0 auto', width: '40px' }}
-          />
+          <Link to="/">
+            <Box
+              component="img"
+              alt="Block"
+              src="/src/assets/b.png"
+              sx={{ flex: '0 0 auto', width: '40px' }}
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -62,22 +65,21 @@ const Header = () => {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <a href="https://www.linkedin.com/in/zanab-jafry-shah/" target='_blank' key={page}>
+                      <Typography textAlign="center" variant="body1" color='black'>{page}</Typography>
+                    </a>
+                  </MenuItem>
               ))}
             </Menu>
           </Box>
 
-
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-              >
-                {page}
+              <Button key={page}>
+                <a href="https://www.linkedin.com/in/zanab-jafry-shah/" target='_blank'>
+                  <Typography textAlign="center" variant="body1" color='black'>{page}</Typography>
+                </a>
               </Button>
             ))}
           </Box>
@@ -102,15 +104,11 @@ const Header = () => {
                 onBlur={toggleSearchBar}
               />
             )}
-
-
             <Divider
               orientation="vertical"
               flexItem
               sx={{ height: '30px', alignSelf: 'center', backgroundColor: 'black' }}
             />
-
-
             <Typography
               variant="body1"
               sx={{
@@ -120,7 +118,6 @@ const Header = () => {
             >
               Login
             </Typography>
-
 
             <Button
               variant="contained"

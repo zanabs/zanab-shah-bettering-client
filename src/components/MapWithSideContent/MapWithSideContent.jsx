@@ -26,7 +26,7 @@ export const MapWithSideContent = ({resources, children, showSideContent}) => {
                 <MapCard resources={resources} iconMapping={iconMapping} />
             </Box>
             {showSideContent && 
-                <Box className="map-with-side-content__content" sx={{p: 3, boxSizing: "border-box"}}>
+                <Box className="map-with-side-content__content" sx={{paddingLeft: 3, paddingRight: 3, paddingTop: 3, boxSizing: "border-box"}}>
                     {children}
                 </Box>
             }
