@@ -65,11 +65,11 @@ const Header = () => {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <a href="https://www.linkedin.com/in/zanab-jafry-shah/" target='_blank' key={page}>
-                      <Typography textAlign="center" variant="body1" color='black'>{page}</Typography>
-                    </a>
-                  </MenuItem>
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <a href="https://www.linkedin.com/in/zanab-jafry-shah/" target='_blank' key={page}>
+                    <Typography textAlign="center" variant="body1" color='black'>{page}</Typography>
+                  </a>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
