@@ -83,17 +83,17 @@ export const ResourcesList = ({ resources, categoryId, cityName }) => {
             }
         } else if (categoryId === "shelter") {
             switch (tag) {
-                case 'all-genders':
+                case 'serves_all_genders':
                     return resource.properties.serves_all_genders;
-                case 'men-only':
+                case 'men_only':
                     return resource.properties.men_only;
-                case 'women-only':
+                case 'women_only':
                     return resource.properties.women_only;
-                case 'food':
+                case 'food_available':
                     return resource.properties.food_available;
-                case 'families':
+                case 'families_welcome':
                     return resource.properties.families_welcome;
-                case 'free':
+                case 'absolutely_free':
                     return resource.properties.absolutely_free;
                 default:
                     return false;
@@ -234,6 +234,106 @@ export const ResourcesList = ({ resources, categoryId, cityName }) => {
                             <Chip
                                 label="No-Cost"
                                 sx={{ bgcolor: selectedTags.includes('free') ? "#2E8B57" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('free')}
+                            />
+                        </>
+                    )}
+                    {categoryId === "shelter" && (
+                        <>
+                            <Chip
+                                label="Serves All Genders"
+                                sx={{ bgcolor: selectedTags.includes('serves_all_genders') ? "#FF8C00" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('serves_all_genders')}
+                            />
+                            <Chip
+                                label="Men Only"
+                                sx={{ bgcolor: selectedTags.includes('men_only') ? "#006400" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('men_only')}
+                            />
+                            <Chip
+                                label="Women Only"
+                                sx={{ bgcolor: selectedTags.includes('women_only') ? "#8B4513" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('women_only')}
+                            />
+                            <Chip
+                                label="Food Available"
+                                sx={{ bgcolor: selectedTags.includes('food_available') ? "#B8860B" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('food_available')}
+                            />
+                            <Chip
+                                label="Families Welcome"
+                                sx={{ bgcolor: selectedTags.includes('families_welcome') ? "#2E8B57" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('families_welcome')}
+                            />
+                            <Chip
+                                label="Absolutely Free"
+                                sx={{ bgcolor: selectedTags.includes('absolutely_free') ? "#2E8B57" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('absolutely_free')}
+                            />
+                        </>
+                    )}
+                    {categoryId === "gardens" && (
+                        <>
+                            <Chip
+                                label="Public"
+                                sx={{ bgcolor: selectedTags.includes('public') ? "#FF8C00" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('public')}
+                            />
+                            <Chip
+                                label="Private"
+                                sx={{ bgcolor: selectedTags.includes('private') ? "#006400" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('private')}
+                            />
+                            <Chip
+                                label="Free"
+                                sx={{ bgcolor: selectedTags.includes('free') ? "#8B4513" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('free')}
+                            />
+                        </>
+                    )}             
+                    {categoryId === "mental-health" && (
+                        <>
+                            <Chip
+                                label="Sliding Scale"
+                                sx={{ bgcolor: selectedTags.includes('sliding_scale') ? "#FF8C00" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('sliding_scale')}
+                            />
+                            <Chip
+                                label="Free"
+                                sx={{ bgcolor: selectedTags.includes('free') ? "#006400" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('free')}
+                            />
+                        </>
+                    )}   
+                    {categoryId === "dentistry" && (
+                        <>
+                            <Chip
+                                label="Sliding Scale"
+                                sx={{ bgcolor: selectedTags.includes('sliding_scale') ? "#FF8C00" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('sliding_scale')}
+                            />
+                            <Chip
+                                label="Free"
+                                sx={{ bgcolor: selectedTags.includes('free') ? "#006400" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('free')}
+                            />
+                        </>
+                    )}
+                    {categoryId === "gbv" && (
+                        <>
+                            <Chip
+                                label="Sliding Scale"
+                                sx={{ bgcolor: selectedTags.includes('sliding_scale') ? "#FF8C00" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('sliding_scale')}
+                            />
+                            <Chip
+                                label="Translation Services"
+                                sx={{ bgcolor: selectedTags.includes('translation_services_available') ? "#006400" : "black", color: "#fff" }}
+                                onClick={() => handleTagToggle('translation_services_available')}
+                            />
+                            <Chip
+                                label="Free"
+                                sx={{ bgcolor: selectedTags.includes('free') ? "#8B4513" : "black", color: "#fff" }}
                                 onClick={() => handleTagToggle('free')}
                             />
                         </>
