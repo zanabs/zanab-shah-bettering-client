@@ -1,4 +1,4 @@
-import { AdvancedMarker, APIProvider, Map, Pin } from "@vis.gl/react-google-maps";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import { useState, useEffect } from "react";
 import FoodIcon from '@mui/icons-material/Restaurant';
 import MentalHealthIcon from '@mui/icons-material/Psychology';
@@ -7,6 +7,7 @@ import GardenIcon from '@mui/icons-material/Nature';
 import DentistryIcon from '@mui/icons-material/HealthAndSafety';
 import ShelterIcon from '@mui/icons-material/Home';
 import CulturalSupportIcon from '@mui/icons-material/Groups';
+import { MarkerWithInfoWindow } from "../MarkerWithInfoWindow/MarkerWithInfoWindow";
 
 const resourceImageMap = {
   'food': <FoodIcon sx={{color: 'brown'}} />,
@@ -22,7 +23,6 @@ export const MapCard = ({ resources }) => {
   const api_Key = import.meta.env.VITE_MAPS_API_KEY;
   const map_Id = import.meta.env.VITE_MAP_ID;
   const [userLocation, setUserLocation] = useState(null);
-
  
   const getUserLocation = () => {
     if (navigator.geolocation) {
@@ -46,7 +46,8 @@ export const MapCard = ({ resources }) => {
     getUserLocation();
   }, []);
 
-  const handleMarkerClick = (resource) => {
+  const handleGetDirectionsClick = (resource) => {
+    console.log('clicked');
     if (!userLocation) {
       alert("Unable to get your location.");
       return;
@@ -55,7 +56,7 @@ export const MapCard = ({ resources }) => {
     const destinationLat = resource.geometry.coordinates[1];
     const destinationLng = resource.geometry.coordinates[0];
     const mapsURL = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${destinationLat},${destinationLng}&travelmode=driving`;
-
+    console.log('clicked 2');
     
     window.open(mapsURL, "_blank");
   };
@@ -64,25 +65,23 @@ export const MapCard = ({ resources }) => {
     <APIProvider apiKey={api_Key}>
       <Map
         mapId={map_Id}
-        style={{ width: '100%', height: '100vh' }}
+        style={{ width: '100%', height: '100%' }}
         defaultCenter={{ lat: 49.28594, lng: -123.11129 }}  // Waterfront Station, Vancouver
         defaultZoom={12}  
         gestureHandling={'greedy'}
         disableDefaultUI={true}
       >
         {resources.map((resource) => (
-          <AdvancedMarker
+          <MarkerWithInfoWindow
+            resource={resource}
             position={{
               lng: resource.geometry.coordinates[0],
               lat: resource.geometry.coordinates[1],
             }}
-            key={resource.id || resource.properties.id} 
-            onClick={() => handleMarkerClick(resource)}
-          >
-            <Pin background="white" scale={1.2} >
-              {resourceImageMap[resource.properties.type]}
-            </Pin>
-          </AdvancedMarker>
+            pinImage={resourceImageMap[resource.properties.type]}
+            key={`${resource.properties.type}-${resource.id | resource.properties.id}`} 
+            onGetDirectionsClick={() => handleGetDirectionsClick(resource)}
+          />
         ))}
       </Map>
     </APIProvider>
