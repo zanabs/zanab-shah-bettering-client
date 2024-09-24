@@ -3,7 +3,8 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Box, Avatar } from '@mui/material'; 
+import { Box } from '@mui/material'; 
+import { getCategoryImages } from '../../utils/categoryImages';
 
 export const ListCard = ({ cardItem }) => {
   const navigate = useNavigate();
@@ -104,14 +105,7 @@ export const ListCard = ({ cardItem }) => {
       <CardActionArea>
         
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start', width: '100%' }}>
-          
-          <Avatar
-            src="/static/images/default-placeholder.png" 
-            sx={{ width: 56, height: 56, borderRadius: '50%' }}
-            alt={resource.name || 'Placeholder'}
-          />
-          
-          
+          {getCategoryImages()[resource.type]}          
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
             <Typography variant="body1" fontWeight="bold" color="textPrimary">
               {resource.name || 'Default Title'}

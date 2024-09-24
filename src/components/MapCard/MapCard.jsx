@@ -1,23 +1,7 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import { useState, useEffect } from "react";
-import FoodIcon from '@mui/icons-material/Restaurant';
-import MentalHealthIcon from '@mui/icons-material/Psychology';
-import GBVIcon from '@mui/icons-material/ReportProblem';
-import GardenIcon from '@mui/icons-material/Nature';
-import DentistryIcon from '@mui/icons-material/HealthAndSafety';
-import ShelterIcon from '@mui/icons-material/Home';
-import CulturalSupportIcon from '@mui/icons-material/Groups';
 import { MarkerWithInfoWindow } from "../MarkerWithInfoWindow/MarkerWithInfoWindow";
-
-const resourceImageMap = {
-  'food': <FoodIcon sx={{color: 'brown'}} />,
-  'mental-health': <MentalHealthIcon sx={{color: 'blue'}}  />,
-  'gbv': <GBVIcon sx={{color: 'pink'}}  />,
-  'gardens': <GardenIcon sx={{color: 'green'}} />,
-  'dentistry': <DentistryIcon sx={{color: 'purple'}}  />,
-  'shelter': <ShelterIcon sx={{color: 'orange'}}  />,
-  'cultural-support': <CulturalSupportIcon sx={{color: 'red'}} />,
-}
+import { getCategoryImages } from "../../utils/categoryImages";
 
 export const MapCard = ({ resources }) => {
   const api_Key = import.meta.env.VITE_MAPS_API_KEY;
@@ -78,7 +62,7 @@ export const MapCard = ({ resources }) => {
               lng: resource.geometry.coordinates[0],
               lat: resource.geometry.coordinates[1],
             }}
-            pinImage={resourceImageMap[resource.properties.type]}
+            pinImage={getCategoryImages()[resource.properties.type]}
             key={`${resource.properties.type}-${resource.id | resource.properties.id}`} 
             onGetDirectionsClick={() => handleGetDirectionsClick(resource)}
           />

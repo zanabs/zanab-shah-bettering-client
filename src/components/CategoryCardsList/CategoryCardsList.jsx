@@ -1,7 +1,8 @@
-import { Box, Typography, Grid2 as Grid, Card, Avatar } from "@mui/material";
+import { Box, Typography, Grid2 as Grid, Card } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getCategoryImages } from "../../utils/categoryImages";
 
 export const CategoryCardsList = ({ resources }) => {
   const navigate = useNavigate();
@@ -90,11 +91,7 @@ const CategoryCard = ({ category, onClick, resources }) => {
     >
 
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
-        <Avatar
-          src={category.image || "/static/images/default-placeholder.png"}
-          sx={{ width: 64, height: 64, borderRadius: "50%" }}
-          alt={category.name}
-        />
+        {getCategoryImages()[category.id]}
         <Typography variant="body1" fontWeight="bold" color="textPrimary">
           {category.name}
         </Typography>
