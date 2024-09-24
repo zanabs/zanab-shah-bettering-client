@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Button, TextField, Menu, MenuItem, Container, Divider, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import './Header.scss'; 
+import './Header.scss';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Contact'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [showSearchBar, setShowSearchBar] = useState(false); 
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,7 +33,6 @@ const Header = () => {
             sx={{ flex: '0 0 auto', width: '40px' }}
           />
 
-          
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -45,7 +44,7 @@ const Header = () => {
             >
               <MenuIcon />
             </IconButton>
-           
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -70,7 +69,7 @@ const Header = () => {
             </Menu>
           </Box>
 
-          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -84,7 +83,7 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', gap: 2 }}>
-            
+
             {!showSearchBar ? (
               <IconButton onClick={toggleSearchBar} color="inherit">
                 <SearchIcon />
@@ -100,36 +99,36 @@ const Header = () => {
                   borderRadius: '5px',
                   width: '200px',
                 }}
-                onBlur={toggleSearchBar} 
+                onBlur={toggleSearchBar}
               />
             )}
 
-            
+
             <Divider
               orientation="vertical"
               flexItem
               sx={{ height: '30px', alignSelf: 'center', backgroundColor: 'black' }}
             />
 
-           
+
             <Typography
               variant="body1"
               sx={{
-                color: '#000', 
-                cursor: 'pointer', 
+                color: '#000',
+                cursor: 'pointer',
               }}
             >
               Login
             </Typography>
 
-            
+
             <Button
               variant="contained"
               color="primary"
               sx={{
                 borderRadius: '20px',
                 textTransform: 'none',
-                backgroundColor: '#2E8B57', 
+                backgroundColor: '#2E8B57',
               }}
             >
               Signup
