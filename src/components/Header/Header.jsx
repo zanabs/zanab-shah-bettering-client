@@ -109,6 +109,8 @@ const Header = () => {
               flexItem
               sx={{ height: '30px', alignSelf: 'center', backgroundColor: 'black' }}
             />
+
+            <Link to="/login">
             <Typography
               variant="body1"
               sx={{
@@ -118,6 +120,7 @@ const Header = () => {
             >
               Login
             </Typography>
+            </Link>
 
             <Button
               variant="contained"
