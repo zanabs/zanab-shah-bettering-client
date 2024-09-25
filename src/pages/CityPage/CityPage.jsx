@@ -17,7 +17,7 @@ export const CityPage = () => {
   const [resources, setResources] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(true);
   const [showCards, setShowCards] = useState(false);
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

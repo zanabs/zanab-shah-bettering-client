@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { getCategoryImages } from "../../utils/categoryImages";
 
 export const CategoryCardsList = ({ resources }) => {
-  const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_API_URL;
   const [categories, setCategories] = useState([]);
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -15,7 +15,7 @@ export const CategoryCardsList = ({ resources }) => {
         const response = await axios.get(`${apiUrl}/categories`);
         setCategories(response.data);
       } catch (error) {
-        console.error("Error fetching data from the server:", error);
+        console.error('Error fetching categories:', error);
       }
     };
 
@@ -29,36 +29,44 @@ export const CategoryCardsList = ({ resources }) => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 3,
-        bgcolor: "background.default",
-        minHeight: "90vh",
-        overflow: "hidden",
+        bgcolor: 'background.default',
+        minHeight: '90vh',
+        overflow: 'hidden',
       }}
     >
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          {categories.map((category) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
-              <CategoryCard resources={resources} category={category} onClick={() => handleClick(category.id)} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      {resources && (
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            {categories.map((category) => (
+              <Grid item xs={12} sm={6} md={4} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CategoryCard
+                  resources={resources}
+                  category={category}
+                  onClick={() => handleClick(category.id)}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
     </Box>
   );
 };
 
 const CategoryCard = ({ category, onClick, resources }) => {
-  const [displayedLocations, setDisplayedLocations] = useState(1);
+  const [displayedLocations, setDisplayedLocations] = useState(0);
 
   useEffect(() => {
-    let current = 1;
-    const incrementSpeed = 50;
+    let current = 0;
+    const incrementSpeed = 50; // Speed of the count-up animation
 
-    const target = resources.filter(resource => (resource.properties.type === category.id)).length;
+    // Filter resources based on category
+    const target = resources.filter(resource => resource.properties.type === category.id).length;
 
+    // Increment the displayed locations count until it matches the target
     const interval = setInterval(() => {
       setDisplayedLocations((prev) => {
         if (prev < target) {
@@ -72,26 +80,26 @@ const CategoryCard = ({ category, onClick, resources }) => {
     }, incrementSpeed);
 
     return () => clearInterval(interval);
-  }, [resources]);
+  }, [resources, category.id]);
 
   return (
     <Card
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         p: 2,
-        bgcolor: "background.default",
+        bgcolor: 'background.default',
         borderRadius: 2,
         border: 1,
-        borderColor: "divider",
-        cursor: "pointer",
+        borderColor: 'divider',
+        cursor: 'pointer',
       }}
       onClick={onClick}
     >
-
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
         {getCategoryImages()[category.id]}
+
         <Typography variant="body1" fontWeight="bold" color="textPrimary">
           {category.name}
         </Typography>
@@ -100,32 +108,29 @@ const CategoryCard = ({ category, onClick, resources }) => {
         </Typography>
       </Box>
 
-
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
+          display: 'flex',
+          justifyContent: 'center',
           mt: 2,
         }}
       >
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             width: 150,
             height: 40,
-            borderRadius: "5%",
-            bgcolor: "blue",
-            color: "white",
-            fontWeight: "bold",
-            textAlign: "center",
-            fontSize: "0.8rem",
+            borderRadius: '5%',
+            bgcolor: 'blue',
+            color: 'white',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            fontSize: '0.8rem',
           }}
         >
-          <p>
-            {displayedLocations}&nbsp;Resources found
-          </p>
+          <p>{displayedLocations}&nbsp;Resources found</p>
         </Box>
       </Box>
     </Card>

@@ -11,7 +11,6 @@ import { NotFound } from './pages/NotFound';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import DashboardLayoutBasic from './pages/Dashboard/Dashboard';
 
-
 function App() {
   return (
     <>
@@ -21,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path='/dashboard' element={<DashboardLayoutBasic/>}/>
+            <Route path="/dashboard" element={<DashboardLayoutBasic />} />
             <Route path="/city" element={<CitySelectorPage />} />
             <Route path="/city/:cityName" element={<CityPage />} />
             <Route path="/city/:cityName/category/:categoryId" element={<CategoryPage />} />

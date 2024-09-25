@@ -139,11 +139,11 @@ export const ResourcesList = ({ resources, categoryId, cityName }) => {
           return false;
       }
     }
+    return false;
   };
 
   const handleSearch = (searchValue) => {
     setSearchTerm(searchValue.toLowerCase());
-
     let filtered = resources.filter((resource) =>
       resource.properties.program_name.toLowerCase().includes(searchValue.toLowerCase())
     );

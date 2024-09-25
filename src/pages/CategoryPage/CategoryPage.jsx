@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "redaxios";
+import axios from "axios";
 import { MapWithSideContent } from "../../components/MapWithSideContent/MapWithSideContent";
 import { ResourcesList } from "../../components/ResourcesList/ResourcesList";
 
