@@ -1,6 +1,6 @@
 import { Box, Typography, Grid2 as Grid, Card } from "@mui/material";
 import { useEffect, useState } from "react";
-import { default as axios } from "axios";
+import axios from "redaxios";
 import { useNavigate } from "react-router-dom";
 import { getCategoryImages } from "../../utils/categoryImages";
 

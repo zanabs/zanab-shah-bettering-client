@@ -7,7 +7,7 @@ import DentistryIcon from '@mui/icons-material/HealthAndSafety';
 import ShelterIcon from '@mui/icons-material/Home';
 import CulturalSupportIcon from '@mui/icons-material/Groups';
 import { useEffect, useState } from "react";
-import { default as axios } from "axios";
+import axios from "redaxios";
 import { CategoryCardsList } from "../../components/CategoryCardsList/CategoryCardsList";
 import { MapWithSideContent } from "../../components/MapWithSideContent/MapWithSideContent";
 
