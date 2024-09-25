@@ -12,6 +12,7 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import axios from 'axios';
 import { MapCard } from '../../components/MapCard/MapCard';
+import { PatientsList } from '../../components/PatientsList/PatientsList';
 
 const NAVIGATION = [
   {
@@ -24,8 +25,8 @@ const NAVIGATION = [
     icon: <DashboardIcon />,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
+    segment: 'patients',
+    title: 'Patients',
     icon: <ShoppingCartIcon />,
   },
   {
@@ -105,8 +106,9 @@ function DemoPageContent({ pathname }) {
         textAlign: 'center',
       }}
     >
-      {pathname === '/dashboard' ? (
-        <MapCard resources={resources} />
+      {pathname === '/patients' ? (
+        // <MapCard resources={resources} />
+        <PatientsList />
       ) : (
         <Typography>Dashboard content for {pathname}</Typography>
       )}
@@ -141,6 +143,7 @@ function DashboardLayoutBasic(props) {
       window={demoWindow}
     >
       <DashboardLayout>
+        <PatientsList />
         <DemoPageContent pathname={pathname} />
       </DashboardLayout>
     </AppProvider>

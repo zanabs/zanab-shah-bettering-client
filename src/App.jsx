@@ -10,6 +10,8 @@ import { CityPage } from './pages/CityPage/CityPage';
 import { NotFound } from './pages/NotFound';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import DashboardLayoutBasic from './pages/Dashboard/Dashboard';
+import { SimpleCategoryCards } from './pages/SimpleCategoryCardsPage/SimpleCategoryCards';
+import { SimpleCategoryPage } from './pages/SimpleCategoryPage/SimpleCategoryPage';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/city" element={<CitySelectorPage />} />
             <Route path="/city/:cityName" element={<CityPage />} />
             <Route path="/city/:cityName/category/:categoryId" element={<CategoryPage />} />
+            <Route path="/refer-patient" element = {<SimpleCategoryCards/>}/>
+            <Route path="/refer-patient/category/:categoryId" element = {<SimpleCategoryPage/>}/>
             <Route path="/city/:cityName/category/:categoryId/:resourceId" element={<ResourceDetailPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
