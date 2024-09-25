@@ -31,7 +31,7 @@ const Header = () => {
             <Box
               component="img"
               alt="Block"
-              src="/src/assets/b.png"
+              src="/assets/b.png"
               sx={{ flex: '0 0 auto', width: '40px' }}
             />
           </Link>

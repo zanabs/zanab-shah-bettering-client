@@ -9,21 +9,21 @@ export const CitySelectorPage = () => {
       <div className="gallery-grid">
 
         <div className="city-card">
-          <img src="../src/assets/Vancouver.png" alt="Vancouver" className="city-image" />
+          <img src="/assets/Vancouver.png" alt="Vancouver" className="city-image" />
           <Link to="vancouver">
             <button className="city-button">Vancouver</button>
           </Link>
         </div>
 
         <div className="city-card">
-          <img src="../src/assets/Toronto.png" alt="Toronto" className="city-image" />
+          <img src="/assets/Toronto.png" alt="Toronto" className="city-image" />
           <Link to="#">
             <button className="city-button" disabled>Toronto</button>
           </Link>
         </div>
 
         <div className="city-card">
-          <img src="../src/assets/New-York-City.png" alt="New York City" className="city-image" />
+          <img src="/assets/New-York-City.png" alt="New York City" className="city-image" />
           <Link to="#">
             <button className="city-button" disabled>New York City</button>
           </Link>

@@ -20,7 +20,7 @@ export const Footer = () => {
       }}
     >
       <Box display="flex" alignItems="center" justifyContent="space-between" minWidth="60px" position="relative">
-        <img style={{ marginTop: "-1.75px", marginBottom: "-1.75px", marginLeft: "-1.75px", width: '50px', paddingRight: '1em' }} alt="bettering logo" src="/src/assets/b.png" />
+        <img style={{ marginTop: "-1.75px", marginBottom: "-1.75px", marginLeft: "-1.75px", width: '50px', paddingRight: '1em' }} alt="bettering logo" src="/assets/b.png" />
       </Box>
     </Box>
 
