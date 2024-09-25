@@ -10,8 +10,8 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import { MapCard } from './path/to/MapCard';
 import axios from 'axios';
+import { MapCard } from '../../components/MapCard/MapCard';
 
 const NAVIGATION = [
   {
