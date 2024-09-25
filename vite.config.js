@@ -8,7 +8,7 @@ export default defineConfig({
   optimizeDeps:{
     esbuildOptions:{
       plugins:[
-        esbuildCommonjs()
+        esbuildCommonjs(['axios'])
       ]
     }
   }
