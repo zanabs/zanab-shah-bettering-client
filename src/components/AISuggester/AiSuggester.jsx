@@ -42,7 +42,7 @@ export const AiSuggester = () => {
         };
 
         const runThread = async (threadId) => {
-            console.log(2);
+            console.log(3);
             try {
               const response = await axios.post(`${apiUrl}/ai/run`, {
                 threadId
