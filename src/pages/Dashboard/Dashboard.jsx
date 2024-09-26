@@ -21,6 +21,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Link } from 'react-router-dom';
 import AssistantIcon from '@mui/icons-material/Assistant';
 import { AiSuggester } from '../../components/AISuggester/AiSuggester';
+import Diversity1 from '@mui/icons-material/Diversity1';
 
 const NAVIGATION = [
   {
@@ -35,7 +36,7 @@ const NAVIGATION = [
   {
     segment: 'patients',
     title: 'Patients',
-    icon: <ShoppingCartIcon />,
+    icon: <Diversity1 />,
   },
   {
     kind: 'divider',

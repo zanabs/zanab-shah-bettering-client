@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Button, TextField, Box, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate } from 'react-router-dom';
 
 export const PatientsList = ({onPatientClick}) => {
   const [patients, setPatients] = useState([]);
@@ -16,16 +15,12 @@ export const PatientsList = ({onPatientClick}) => {
     notes: '',
   });
 
-  const navigate = useNavigate();
-
-
   useEffect(() => {
     const storedPatients = localStorage.getItem('patients');
     if (storedPatients) {
       setPatients(JSON.parse(storedPatients)); 
     }
   }, []);
-
 
   useEffect(() => {
     if (patients.length > 0) {
@@ -62,14 +57,11 @@ export const PatientsList = ({onPatientClick}) => {
     setShowForm(false);
   };
 
-
   const handlePatientClick = (patient) => {
-    console.log('h')
     setSelectedPatient(patient); 
     setShowForm(false);
     handleReferPatient();
   };
-
 
   const handleReferPatient = () => {
     if (selectedPatient) {
@@ -79,13 +71,13 @@ export const PatientsList = ({onPatientClick}) => {
   };
 
   return (
-    <Box sx={{ display: 'flex', width: '100%', height: '100vh', flexDirection:'column' }}>
-      <Box sx={{ width: '100%', padding: '20px' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100vw', height: '100vh', flexDirection: 'column' }}>
+      <Box sx={{ width: '50%', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {!showForm && !selectedPatient ? (
           patients.map((patient, index) => (
             <Card
               key={index}
-              sx={{ marginBottom: '15px', display: 'flex', justifyContent: 'space-between' }}
+              sx={{ marginBottom: '15px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
               onClick={() => handlePatientClick(patient)} 
             >
               <CardContent>
@@ -105,7 +97,7 @@ export const PatientsList = ({onPatientClick}) => {
             </Card>
           ))
         ) : showForm ? (
-          <Box component="form" onSubmit={handleFormSubmit} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box component="form" onSubmit={handleFormSubmit} sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <TextField
               label="Patient Name"
               variant="outlined"
@@ -158,7 +150,7 @@ export const PatientsList = ({onPatientClick}) => {
               onChange={handleInputChange}
               sx={{ marginBottom: '15px' }}
             />
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="primary" type="submit" sx={{ width: '100%' }}>
               SUBMIT NEW PATIENT TO DATABASE
             </Button>
           </Box>
@@ -193,7 +185,7 @@ export const PatientsList = ({onPatientClick}) => {
 
       <Box
         sx={{
-          width: '100%%',
+          width: '50%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
