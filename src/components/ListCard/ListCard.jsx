@@ -64,7 +64,7 @@ export const ListCard = ({ cardItem }) => {
         };
 
         // Fixed URL with proper protocol
-        await axios.post(`${apiUrl}/twil/send-referral`, messageData);
+        await axios.post(`${apiUrl}/twi/send-referral`, messageData);
         console.log('Message sent successfully');
       } catch (error) {
         console.error('Error sending referral:', error);
