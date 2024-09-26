@@ -1,5 +1,6 @@
 import { Box, Button, CircularProgress } from "@mui/material";
 import axios from "axios";
+import OpenAI from "openai";
 import { useEffect, useState } from "react"
 import Markdown from "react-markdown";
 
@@ -8,6 +9,8 @@ export const AiSuggester = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [loadingAi, setLoadingAi] = useState(false);
     const [aiMessages, setAiMessages] = useState([]);
+
+    const [openAi, setOpenAi] = useState(new OpenAI({apiKey: process.env.OPENAI_API_KEY}));
 
     useEffect(() => {
         const patient = localStorage.getItem('selectedPatient');
@@ -42,17 +45,25 @@ export const AiSuggester = () => {
         };
 
         const runThread = async (threadId) => {
-            console.log(3);
-            try {
-              const response = await axios.post(`${apiUrl}/ai/run`, {
-                threadId
-              });
-              console.log(response);
-              return response.data;
-            } catch (error) {
-              console.error('Error fetching data from the server:', error);
-            }
-            console.log(4);
+
+            let run = await openAi.beta.threads.runs.createAndPoll(
+                threadId,
+                { 
+                  assistant_id: process.env.ASSISTANT_ID,
+                  instructions: "You are an expert on social infrastructure support resources in Vancouver Canada. Use the data provided in the files to suggest a resource by it's name as well as why you are making the suggestion. ONLY make suggestions of resources in the data files"
+                }
+              );
+            console.log(run);
+            // try {
+            //   const response = await axios.post(`${apiUrl}/ai/run`, {
+            //     threadId
+            //   });
+            //   console.log(response);
+            //   return response.data;
+            // } catch (error) {
+            //   console.error('Error fetching data from the server:', error);
+            // }
+            // console.log(4);
         };
 
         const getMessages = async (threadId, run) => {
