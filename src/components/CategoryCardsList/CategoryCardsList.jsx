@@ -41,7 +41,7 @@ export const CategoryCardsList = ({ resources }) => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             {categories.map((category) => (
-              <Grid item xs={12} sm={6} md={4} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Grid size={{xs: 12, sm: 6, md: 4}} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <CategoryCard
                   resources={resources}
                   category={category}
