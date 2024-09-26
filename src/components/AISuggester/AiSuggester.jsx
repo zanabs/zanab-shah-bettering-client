@@ -29,25 +29,30 @@ export const AiSuggester = () => {
         };
 
         const sendMessage = async (threadId) => {
+            console.log(1);
             try {
               const response = await axios.post(`${apiUrl}/ai/send-message`, {
                     threadId,
                     content: JSON.stringify(selectedPatient)
               });
+              console.log(2);
             } catch (error) {
               console.error('Error fetching data from the server:', error);
             }
         };
 
         const runThread = async (threadId) => {
+            console.log(2);
             try {
               const response = await axios.post(`${apiUrl}/ai/run`, {
                 threadId
               });
+              console.log(response);
               return response.data;
             } catch (error) {
               console.error('Error fetching data from the server:', error);
             }
+            console.log(4);
         };
 
         const getMessages = async (threadId, run) => {
