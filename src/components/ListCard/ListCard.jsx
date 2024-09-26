@@ -8,6 +8,7 @@ import { getCategoryImages } from '../../utils/categoryImages';
 import axios from 'axios'; // For making requests
 
 export const ListCard = ({ cardItem }) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
   const [openModal, setOpenModal] = useState(false);
@@ -63,7 +64,7 @@ export const ListCard = ({ cardItem }) => {
         };
 
         // Fixed URL with proper protocol
-        await axios.post('http://localhost:3001/api/send-referral', messageData);
+        await axios.post(`${apiUrl}/twil/send-referral`, messageData);
         console.log('Message sent successfully');
       } catch (error) {
         console.error('Error sending referral:', error);
