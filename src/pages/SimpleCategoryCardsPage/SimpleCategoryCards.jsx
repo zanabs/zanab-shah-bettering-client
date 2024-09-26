@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import axios from "redaxios";
 import { useNavigate } from 'react-router-dom';
 
-export const SimpleCategoryCards = () => {
+export const SimpleCategoryCards = ({onSelectCategory}) => {
   const [categories, setCategories] = useState([]);
   const [resources, setResources] = useState([]);
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -34,8 +34,9 @@ export const SimpleCategoryCards = () => {
   }, []);
 
   const handleCategoryClick = (categoryId) => {
+    onSelectCategory(categoryId);
     // Navigate to the category page when the card or button is clicked
-    navigate(`/refer-patient/${categoryId}`);
+    // navigate(`/refer-patient/${categoryId}`);
   };
 
   return (
@@ -44,7 +45,7 @@ export const SimpleCategoryCards = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             {categories.map((category) => (
-              <Grid item xs={12} sm={6} md={4} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Grid item xs={12} sm={6} md={6} key={category.id} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <CategoryCard
                   category={category}
                   resources={resources}

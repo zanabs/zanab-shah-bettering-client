@@ -181,9 +181,9 @@ export const ResourcesList = ({ resources, categoryId, cityName }) => {
 
   return (
     <Box flex="1" sx={{ height: '100%', overflowY: 'auto' }}>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1, paddingBottom: 1 }}>
         <Typography variant="h4" component="h1">
-          {categoryId} resources | {cityName}
+          {categoryId} resources | {cityName || 'vancouver'}
         </Typography>
       </Box>
       <Box display="flex" alignItems="center" gap={2} style={{ width: '100%' }}>

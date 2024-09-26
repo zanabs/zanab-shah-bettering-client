@@ -5,9 +5,9 @@ import { MapWithSideContent } from "../../components/MapWithSideContent/MapWithS
 import { ResourcesList } from "../../components/ResourcesList/ResourcesList";
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Checkbox, FormControlLabel } from "@mui/material";
 
-export const SimpleCategoryPage = () => {
+export const SimpleCategoryPage = ({categoryId, patientName}) => {
   const apiUrl = import.meta.env.VITE_API_URL;
-  const { categoryId, cityName } = useParams();
+  const { cityName } = useParams();
   const location = useLocation(); // For checking the route
   const [resources, setResources] = useState([]);
   const [name, setName] = useState('');
@@ -23,8 +23,7 @@ export const SimpleCategoryPage = () => {
 
   useEffect(() => {
     const selectedPatient = localStorage.getItem('selectedPatient');
-    console.log(JSON.parse(selectedPatient).name);
-    if (selectedPatient) {
+    if (selectedPatient && selectedPatient.name) {
       setPatientInfo({
         name: JSON.parse(selectedPatient).name
       }); 
@@ -56,7 +55,7 @@ export const SimpleCategoryPage = () => {
     console.log('kg')
     const { name, value, checked, type } = event.target;
     setPatientInfo({
-      name: '[houx'
+      name: value
     })
     // setPatientInfo({
     //   ...patientInfo,
@@ -70,7 +69,7 @@ export const SimpleCategoryPage = () => {
         resources={resources}
         categoryId={categoryId}
         cityName={cityName}
-        renderButton={location.pathname.startsWith('/refer-patient')}
+        renderButton={!!patientName}
         onReferClick={handleOpen} // Pass down the function to open the modal
       />
 

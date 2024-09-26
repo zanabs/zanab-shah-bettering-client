@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Button, TextField, Box, IconButton } fro
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 
-export const PatientsList = () => {
+export const PatientsList = ({onPatientClick}) => {
   const [patients, setPatients] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null); 
@@ -64,21 +64,23 @@ export const PatientsList = () => {
 
 
   const handlePatientClick = (patient) => {
+    console.log('h')
     setSelectedPatient(patient); 
     setShowForm(false);
+    handleReferPatient();
   };
 
 
   const handleReferPatient = () => {
     if (selectedPatient) {
       localStorage.setItem('selectedPatient', JSON.stringify(selectedPatient)); 
-      navigate('/refer-patient');
+      onPatientClick();
     }
   };
 
   return (
     <Box sx={{ display: 'flex', width: '100%', height: '100vh', flexDirection:'column' }}>
-      <Box sx={{ width: '75%', padding: '20px' }}>
+      <Box sx={{ width: '100%', padding: '20px' }}>
         {!showForm && !selectedPatient ? (
           patients.map((patient, index) => (
             <Card
@@ -191,12 +193,12 @@ export const PatientsList = () => {
 
       <Box
         sx={{
-          width: '25%',
+          width: '100%%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           padding: '20px',
-          backgroundColor: '#f5f5f5',
+          backgroundColor: '#f9f9f9',
         }}
       >
         {!showForm && !selectedPatient && (

@@ -31,11 +31,21 @@ body {
 }
 
 h1 {
-  font-size: 2em;
-  line-height: 1.1;
+  font-size: 4em;
+  line-height: 1em;
+  margin: 0.5em 0;
 
   @include for-tablet {
-    font-size: 3em;
+    font-size: 5em;
+  }
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1.5em;
+
+  @include for-tablet {
+    font-size: 2em;
   }
 }
 

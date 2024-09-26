@@ -19,8 +19,9 @@ export const HomePage = () => {
 
       <div className="hero-content">
         <h1 key={key} className="hero-heading">
-          Find access to social infrastructure, <span className="fast-typing">fast</span>
+          Bettering          
         </h1>
+        <h2 className="hero-heading">Access to social infrastructure, <span className="fast-typing">fast</span></h2>
         <p className="hero-subtitle">Help is closer than you think</p>
         <div className="hero-buttons">
           <button className="hero-button" onClick={() => navigate('/city')}>Enter Site</button>

@@ -74,9 +74,14 @@ export const ListCard = ({ cardItem }) => {
   const handleMakeReferral = async (e) => {
     e.stopPropagation();
     await handleSendReferral();
+
+  };
+
+  const confirmReferral = (e) => {
+    e.stopPropagation();
     setOpenModal(false);
     setOpenConfirmationModal(true);
-  };
+  }
 
   const handleCloseConfirmationModal = (e) => {
     e.stopPropagation();
@@ -138,7 +143,7 @@ export const ListCard = ({ cardItem }) => {
         </Box>
       </CardActionArea>
 
-      {location.pathname.startsWith('/refer-patient') && (
+      {location.pathname.startsWith('/dashboard') && (
         <>
           <Button
             variant="contained"
@@ -184,12 +189,6 @@ export const ListCard = ({ cardItem }) => {
                 label="Patient does not have a phone number"
               />
 
-              {patientInfo.noPhone && (
-                <Button variant="outlined" onClick={handlePrint}>
-                  Print or Save as PDF
-                </Button>
-              )}
-
               <FormControlLabel
                 control={
                   <Checkbox
@@ -215,7 +214,7 @@ export const ListCard = ({ cardItem }) => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseModal}>Cancel</Button>
-              <Button onClick={handleMakeReferral}>Make Referral</Button>
+              <Button onClick={confirmReferral}>Make Referral</Button>
             </DialogActions>
           </Dialog>
 
@@ -241,6 +240,14 @@ export const ListCard = ({ cardItem }) => {
               </Typography>
             </DialogContent>
             <DialogActions>
+                <Button variant="outlined" onClick={handlePrint}>
+                  Print or Save as PDF
+                </Button>
+              {!patientInfo.noPhone && patientInfo.phone && (
+                <Button variant="outlined" onClick={handleMakeReferral}>
+                  Send referral as text
+                </Button>
+              )}
               <Button onClick={handleCloseConfirmationModal}>Close</Button>
             </DialogActions>
           </Dialog>

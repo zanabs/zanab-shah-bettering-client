@@ -13,6 +13,14 @@ import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import axios from 'axios';
 import { MapCard } from '../../components/MapCard/MapCard';
 import { PatientsList } from '../../components/PatientsList/PatientsList';
+import { MapWithSideContent } from '../../components/MapWithSideContent/MapWithSideContent';
+import { SimpleCategoryCards } from '../SimpleCategoryCardsPage/SimpleCategoryCards';
+import { SimpleCategoryPage } from '../SimpleCategoryPage/SimpleCategoryPage';
+import { Button } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import { Link } from 'react-router-dom';
+import AssistantIcon from '@mui/icons-material/Assistant';
+import { AiSuggester } from '../../components/AISuggester/AiSuggester';
 
 const NAVIGATION = [
   {
@@ -58,6 +66,15 @@ const NAVIGATION = [
     title: 'Integrations',
     icon: <LayersIcon />,
   },
+  {
+    kind: 'header',
+    title: 'Tools',
+  },
+  {
+    segment: 'ai',
+    title: 'AI Assistant',
+    icon: <AssistantIcon />,
+  },
 ];
 
 const demoTheme = createTheme({
@@ -76,41 +93,81 @@ const demoTheme = createTheme({
   },
 });
 
-function DemoPageContent({ pathname }) {
+function DemoPageContent({ pathname, setPathname }) {
   const [resources, setResources] = React.useState([]);
+  const [categorySelected, setCategorySelected] = React.useState(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   React.useEffect(() => {
     if (pathname === '/dashboard') {
-      axios.get('/resources')
-        .then((response) => {
-          const data = response.data;
-          if (Array.isArray(data)) {
-            setResources(data);
-          } else {
-            setResources([]);
-          }
-        })
-        .catch(() => {
-          setResources([]);
-        });
+      const getResources = async () => {
+        try {
+          const response = await axios.get(`${apiUrl}/resources`);
+          setResources(response.data);
+        } catch (error) {
+          console.error('Error fetching data from the server:', error);
+        }
+      };
+  
+      getResources();
     }
   }, [pathname]);
+
+  const handleCategoryClick = (categoryId) => {
+    setCategorySelected(categoryId);
+  }
+
+  const [patientName, setPatientName] = React.useState('');
+
+  React.useEffect(() => {
+    const selectedPatient = localStorage.getItem('selectedPatient');
+    if (selectedPatient) {
+      const patient = JSON.parse(selectedPatient);
+      setPatientName(patient.name);
+    }
+  }, [pathname]);
+
+  const resetPatient = () => {
+    localStorage.removeItem('selectedPatient');
+    setPatientName('');
+  }
 
   return (
     <Box
       sx={{
-        py: 4,
+        my: '1em',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
+        width: '100%',
+        background: '#f9f9f9'
       }}
     >
-      {pathname === '/patients' ? (
-        // <MapCard resources={resources} />
-        <PatientsList />
-      ) : (
-        <Typography>Dashboard content for {pathname}</Typography>
+      {pathname === '/dashboard' && (
+        <>
+          {patientName && 
+            <>
+              <Box display={'flex'}>
+                <h2>Making referral for {patientName}</h2>
+                <Button onClick={resetPatient}><ClearIcon/></Button>
+              </Box>
+              <AiSuggester />
+            </>
+          }
+          {!categorySelected ? 
+            <MapWithSideContent resources={resources} showSideContent={true}>            
+              <SimpleCategoryCards onSelectCategory={handleCategoryClick} />
+            </MapWithSideContent> 
+            : <SimpleCategoryPage categoryId={categorySelected} patientName={patientName} />
+          }
+        </>
+      )}
+      {pathname === '/patients' && (
+        <PatientsList onPatientClick={() => (setPathname('/dashboard'))} />
+      )}
+      {pathname === '/ai' && (
+        <AiSuggester />
       )}
     </Box>
   );
@@ -141,10 +198,13 @@ function DashboardLayoutBasic(props) {
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo: <Link to="/"><img src='/assets/b.png' /></Link>,
+        title: 'Provider Portal'
+      }}
     >
       <DashboardLayout>
-        <PatientsList />
-        <DemoPageContent pathname={pathname} />
+        <DemoPageContent pathname={pathname} setPathname={setPathname} />
       </DashboardLayout>
     </AppProvider>
   );
