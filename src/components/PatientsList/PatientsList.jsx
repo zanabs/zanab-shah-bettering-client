@@ -77,7 +77,7 @@ export const PatientsList = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', width: '100vw', height: '100vh' }}>
+    <Box sx={{ display: 'flex', width: '100%', height: '100vh', flexDirection:'column' }}>
       <Box sx={{ width: '75%', padding: '20px' }}>
         {!showForm && !selectedPatient ? (
           patients.map((patient, index) => (

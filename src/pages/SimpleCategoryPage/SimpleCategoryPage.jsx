@@ -10,6 +10,8 @@ export const SimpleCategoryPage = () => {
   const { categoryId, cityName } = useParams();
   const location = useLocation(); // For checking the route
   const [resources, setResources] = useState([]);
+  const [name, setName] = useState('');
+
   const [open, setOpen] = useState(false); // State to handle modal open/close
   const [patientInfo, setPatientInfo] = useState({
     name: '',
@@ -18,6 +20,20 @@ export const SimpleCategoryPage = () => {
     slidingScale: false,
     concern: '',
   });
+
+  useEffect(() => {
+    const selectedPatient = localStorage.getItem('selectedPatient');
+    console.log(JSON.parse(selectedPatient).name);
+    if (selectedPatient) {
+      setPatientInfo({
+        name: JSON.parse(selectedPatient).name
+      }); 
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(patientInfo)
+  }, [patientInfo]);
 
   useEffect(() => {
     const getResources = async () => {
@@ -37,11 +53,15 @@ export const SimpleCategoryPage = () => {
 
   // Handle form inputs
   const handleInputChange = (event) => {
+    console.log('kg')
     const { name, value, checked, type } = event.target;
     setPatientInfo({
-      ...patientInfo,
-      [name]: type === "checkbox" ? checked : value,
-    });
+      name: '[houx'
+    })
+    // setPatientInfo({
+    //   ...patientInfo,
+    //   [name]: type === "checkbox" ? checked : value,
+    // });
   };
 
   return (
@@ -58,6 +78,11 @@ export const SimpleCategoryPage = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Refer Patient</DialogTitle>
         <DialogContent>
+        <TextField
+            value={name}
+            onChange={() => setName('newe name')}
+          />
+          {patientInfo.name}
           <TextField
             autoFocus
             margin="dense"
@@ -65,7 +90,7 @@ export const SimpleCategoryPage = () => {
             name="name"
             fullWidth
             value={patientInfo.name}
-            onChange={handleInputChange}
+            onChange={() => handleInputChange()}
           />
           <TextField
             margin="dense"

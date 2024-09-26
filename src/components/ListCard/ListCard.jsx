@@ -5,12 +5,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Box, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Checkbox, FormControlLabel } from '@mui/material';
 import { getCategoryImages } from '../../utils/categoryImages';
+import axios from 'axios'; // For making requests
 
 export const ListCard = ({ cardItem }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openModal, setOpenModal] = useState(false); 
-  const [openConfirmationModal, setOpenConfirmationModal] = useState(false); 
+  const [openModal, setOpenModal] = useState(false);
+  const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [patientInfo, setPatientInfo] = useState({
     name: '',
     phone: '',
@@ -23,16 +24,16 @@ export const ListCard = ({ cardItem }) => {
     description: '',
     type: '',
     id: '',
-    geometry: { coordinates: [] }, 
+    geometry: { coordinates: [] },
   });
 
   const handleOpenModal = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setOpenModal(true);
   };
 
   const handleCloseModal = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setOpenModal(false);
   };
 
@@ -45,30 +46,62 @@ export const ListCard = ({ cardItem }) => {
   };
 
   const handlePrint = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     window.print();
   };
 
-  const handleMakeReferral = (e) => {
-    e.stopPropagation(); 
+  const handleSendReferral = async () => {
+    if (!patientInfo.noPhone && patientInfo.phone) {
+      try {
+        const messageData = {
+          phone: patientInfo.phone,
+          patientName: patientInfo.name,
+          concern: patientInfo.concern,
+          programName: resource.name,
+          description: resource.description,
+          googleMapsLink: `https://www.google.com/maps?q=${resource.geometry.coordinates[1]},${resource.geometry.coordinates[0]}`
+        };
+
+        // Fixed URL with proper protocol
+        await axios.post('http://localhost:3001/api/send-referral', messageData);
+        console.log('Message sent successfully');
+      } catch (error) {
+        console.error('Error sending referral:', error);
+      }
+    }
+  };
+
+  const handleMakeReferral = async (e) => {
+    e.stopPropagation();
+    await handleSendReferral();
     setOpenModal(false);
     setOpenConfirmationModal(true);
   };
 
   const handleCloseConfirmationModal = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setOpenConfirmationModal(false);
   };
 
   useEffect(() => {
-  
+    const selectedPatient = localStorage.getItem('selectedPatient');
+    if (selectedPatient) {
+      const patient = JSON.parse(selectedPatient);
+      setPatientInfo({
+        name: patient.name,
+        phone: patient.phoneNumber
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     if (cardItem.properties) {
       setResource({
         id: cardItem.id,
         name: cardItem.properties.program_name,
         description: cardItem.properties.description || cardItem.properties.category,
         type: cardItem.properties.type,
-        geometry: cardItem.geometry, 
+        geometry: cardItem.geometry,
       });
     }
   }, [cardItem]);
@@ -89,11 +122,11 @@ export const ListCard = ({ cardItem }) => {
         minHeight: '200px',
         width: '100%'
       }}
-      onClick={() => navigate(`./${resource.id}`)} 
+      onClick={() => navigate(`./${resource.id}`)}
     >
       <CardActionArea>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start', width: '100%' }}>
-          {getCategoryImages()[resource.type]}          
+          {getCategoryImages()[resource.type]}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
             <Typography variant="body1" fontWeight="bold" color="textPrimary">
               {resource.name || 'Default Title'}
@@ -105,7 +138,6 @@ export const ListCard = ({ cardItem }) => {
         </Box>
       </CardActionArea>
 
-      
       {location.pathname.startsWith('/refer-patient') && (
         <>
           <Button
@@ -117,7 +149,6 @@ export const ListCard = ({ cardItem }) => {
             Make Referral
           </Button>
 
-     
           <Dialog open={openModal} onClose={handleCloseModal} onClick={(e) => e.stopPropagation()}>
             <DialogTitle>Refer Patient</DialogTitle>
             <DialogContent>
@@ -129,7 +160,7 @@ export const ListCard = ({ cardItem }) => {
                 fullWidth
                 value={patientInfo.name}
                 onChange={handleInputChange}
-                onClick={(e) => e.stopPropagation()} 
+                onClick={(e) => e.stopPropagation()}
               />
               <TextField
                 margin="dense"
@@ -139,7 +170,7 @@ export const ListCard = ({ cardItem }) => {
                 value={patientInfo.phone}
                 onChange={handleInputChange}
                 disabled={patientInfo.noPhone}
-                onClick={(e) => e.stopPropagation()} 
+                onClick={(e) => e.stopPropagation()}
               />
               <FormControlLabel
                 control={
@@ -147,13 +178,12 @@ export const ListCard = ({ cardItem }) => {
                     name="noPhone"
                     checked={patientInfo.noPhone}
                     onChange={handleInputChange}
-                    onClick={(e) => e.stopPropagation()} 
+                    onClick={(e) => e.stopPropagation()}
                   />
                 }
                 label="Patient does not have a phone number"
               />
 
-      
               {patientInfo.noPhone && (
                 <Button variant="outlined" onClick={handlePrint}>
                   Print or Save as PDF
@@ -166,7 +196,7 @@ export const ListCard = ({ cardItem }) => {
                     name="slidingScale"
                     checked={patientInfo.slidingScale}
                     onChange={handleInputChange}
-                    onClick={(e) => e.stopPropagation()} 
+                    onClick={(e) => e.stopPropagation()}
                   />
                 }
                 label="Is the patient in need of free or sliding scale services?"
@@ -180,7 +210,7 @@ export const ListCard = ({ cardItem }) => {
                 rows={4}
                 value={patientInfo.concern}
                 onChange={handleInputChange}
-                onClick={(e) => e.stopPropagation()} 
+                onClick={(e) => e.stopPropagation()}
               />
             </DialogContent>
             <DialogActions>
@@ -189,7 +219,6 @@ export const ListCard = ({ cardItem }) => {
             </DialogActions>
           </Dialog>
 
-       
           <Dialog open={openConfirmationModal} onClose={handleCloseConfirmationModal} onClick={(e) => e.stopPropagation()}>
             <DialogTitle>Appointment Details</DialogTitle>
             <DialogContent>

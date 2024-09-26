@@ -27,7 +27,7 @@ function App() {
             <Route path="/city/:cityName" element={<CityPage />} />
             <Route path="/city/:cityName/category/:categoryId" element={<CategoryPage />} />
             <Route path="/refer-patient" element = {<SimpleCategoryCards/>}/>
-            <Route path="/refer-patient/category/:categoryId" element = {<SimpleCategoryPage/>}/>
+            <Route path="/refer-patient/:categoryId" element = {<SimpleCategoryPage/>}/>
             <Route path="/city/:cityName/category/:categoryId/:resourceId" element={<ResourceDetailPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
