@@ -63,7 +63,7 @@ export const ListCard = ({ cardItem }) => {
           googleMapsLink: `https://www.google.com/maps?q=${resource.geometry.coordinates[1]},${resource.geometry.coordinates[0]}`
         };
 
-        // Fixed URL with proper protocol
+        
         await axios.post(`${apiUrl}/twi/send-referral`, messageData);
         console.log('Message sent successfully');
       } catch (error) {
