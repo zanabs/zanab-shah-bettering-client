@@ -31,7 +31,7 @@ export const AiSuggester = () => {
         const sendMessage = async (threadId) => {
             console.log(1);
             try {
-              const response = await axios.post(`${apiUrl}/ai/send-message`, {
+              await axios.post(`${apiUrl}/ai/send-message`, {
                     threadId,
                     content: JSON.stringify(selectedPatient)
               });
@@ -88,7 +88,7 @@ export const AiSuggester = () => {
             {!selectedPatient ? 
                 <Button variant='contained'>Select a patient to refer</Button> : 
                 <Box gap={2} display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                    <Button variant='contained' onClick={handleAiClick}>Ask AI to make a suggestion based on the user's ({selectedPatient.name}) profile</Button>
+                    <Button variant='contained' onClick={handleAiClick}>Ask AI to make a suggestion based on the user ({selectedPatient.name}) profile</Button>
                     {loadingAi && <CircularProgress />}
                 </Box>
             }

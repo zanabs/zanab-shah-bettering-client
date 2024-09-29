@@ -1,15 +1,15 @@
 
 import { AppProvider, SignInPage } from '@toolpad/core';
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom'; // assuming you're using react-router-dom
+import { useNavigate } from 'react-router-dom'; 
 
-// preview-start
+
 const providers = [{ id: 'credentials', name: 'Email and Password' }];
-// preview-end
+
 
 export const LoginPage = () => {
   const theme = useTheme();
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); 
 
   const signIn = (provider, formData) => {
     const email = formData.get('email');
@@ -18,7 +18,7 @@ export const LoginPage = () => {
     setTimeout(() => {
       if (email === 'user@email.com' && password === 'password') {
         alert(`Successfully signed in with "${provider.name}".`);
-        navigate('/dashboard'); // Redirect to the dashboard after successful login
+        navigate('/dashboard'); 
       } else {
         alert('Invalid email or password.');
       }
@@ -26,11 +26,11 @@ export const LoginPage = () => {
   };
 
   return (
-    // preview-start
+
     <AppProvider theme={theme}>
       <SignInPage signIn={signIn} providers={providers} />
     </AppProvider>
-    // preview-end
+   
   );
 };
 
