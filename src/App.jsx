@@ -12,6 +12,7 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import DashboardLayoutBasic from './pages/Dashboard/Dashboard';
 import { SimpleCategoryCards } from './pages/SimpleCategoryCardsPage/SimpleCategoryCards';
 import { SimpleCategoryPage } from './pages/SimpleCategoryPage/SimpleCategoryPage';
+import { Demo } from './pages/HomePage/Demo/Demo';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/refer-patient" element = {<SimpleCategoryCards/>}/>
             <Route path="/refer-patient/:categoryId" element = {<SimpleCategoryPage/>}/>
             <Route path="/city/:cityName/category/:categoryId/:resourceId" element={<ResourceDetailPage />} />
+            <Route path="/demo" element ={<Demo/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

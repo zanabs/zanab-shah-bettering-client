@@ -121,7 +121,7 @@ const Header = () => {
               Login
             </Typography>
             </Link>
-
+              <Link to="/demo">
             <Button
               variant="contained"
               color="primary"
@@ -131,8 +131,9 @@ const Header = () => {
                 backgroundColor: '#2E8B57',
               }}
             >
-              Signup
+              Demo
             </Button>
+            </Link>
           </Box>
         </Toolbar>
       </Container>
