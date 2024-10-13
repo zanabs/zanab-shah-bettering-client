@@ -19,8 +19,8 @@ export const Demo = () => {
         minHeight: '200px',
         width: '100%'
       }}
-    </Card>
-      <CardActionArea>
+
+    <CardActionArea>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start', width: '100%' }}>
           
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
@@ -30,6 +30,7 @@ export const Demo = () => {
           </Box>
         </Box>
       </CardActionArea>
+    </Card>
     </div>
   )
 }
