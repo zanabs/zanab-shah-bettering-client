@@ -12,7 +12,7 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import DashboardLayoutBasic from './pages/Dashboard/Dashboard';
 import { SimpleCategoryCards } from './pages/SimpleCategoryCardsPage/SimpleCategoryCards';
 import { SimpleCategoryPage } from './pages/SimpleCategoryPage/SimpleCategoryPage';
-import { Demo } from './pages/HomePage/Demo/Demo';
+import { Demo } from './pages/Demo/Demo';
 
 function App() {
   return (
