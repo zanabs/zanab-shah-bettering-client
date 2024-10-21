@@ -1,16 +1,82 @@
-
-
 .main-content {
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  
   &__demo-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     gap: 2rem;
-    
-    
+  }
+
+  &__demo-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+  }
+  
+}
+
+
+.eye-catching {
+  font-family: 'Courier', monospace;
+  white-space: nowrap; /* Prevents the text from wrapping */
+  overflow: hidden; /* Ensures the text is hidden until revealed */
+  border-right: 2px solid black; /* Creates the blinking caret */
+  width: 0; /* Initially set the width to 0 to hide the text */
+  animation: typing 5s steps(100, end) forwards, blink-caret 0.75s step-end infinite;
+  font-weight: 400;
+  font-style: italic;
+
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* Reveal the full width of the text */
   }
 }
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  100% {
+    border-color: black; /* Blink effect for the caret */
+  }
+}
+
+
+
+
+.demo-scenarios .card {
+  position: absolute; /* Take the cards out of the normal flow */
+  top: 200vh; /* Place them far below the visible content */
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.demo-scenarios .card.visible {
+  position: relative; /* Restore the normal flow when visible */
+  top: 0;
+  visibility: visible;
+  height: auto;
+  width: 60vw;
+  padding: 2.5rem;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
 
